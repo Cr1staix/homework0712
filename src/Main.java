@@ -41,6 +41,9 @@ public class Main {
 
         System.out.println(library.getAuthors());
 
+        System.out.println(library.getAvailableGroup());
+        System.out.println(library.getAuthorGroup());
+
     }
 
     public static Book getBook(Library library, Integer id) {

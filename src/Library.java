@@ -2,6 +2,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * Класс создает объект типа Library. Класс реализовывает логику хранения и выдачи объектов типа Book.
@@ -101,5 +102,25 @@ public class Library {
                 .map(Book::getAuthor)
                 .distinct()
                 .toList();
+    }
+
+    /**
+     * Метод для сортировки в группу книг по их доступности/недоступности к получению.
+     *
+     * @return Возвращает книги собранные в группу по признаку доступности/недоступности.
+     */
+    public Map<Boolean, List<Book>> getAvailableGroup() {
+        return books.values().stream()
+                .collect(Collectors.partitioningBy(b -> b.getAvailable()));
+    }
+
+    /**
+     * Метод для группирования книг по автору.
+     *
+     * @return Возвращает книги собранные в группу по автору.
+     */
+    public Map<String, List<Book>> getAuthorGroup() {
+        return books.values().stream()
+                .collect(Collectors.groupingBy(b -> b.getAuthor()));
     }
 }
